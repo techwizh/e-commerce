@@ -12,14 +12,19 @@ const colorSchema = z.object({
   hex: z.string().min(1),
 })
 
+const imageSchema = z.string().refine(
+  (value) => value.startsWith('http') || value.startsWith('/'),
+  { message: 'Image must be a URL or path' },
+)
+
 const productSchema = z.object({
   id: z.string().min(1).optional(),
   name: z.string().min(1),
   category: z.enum(['sports-shoes', 'sneakers', 'sports-shirts']),
   price: z.number().positive(),
   originalPrice: z.number().positive().optional(),
-  image: z.string().url(),
-  images: z.array(z.string().url()).min(1),
+  image: imageSchema,
+  images: z.array(imageSchema).min(1),
   description: z.string().min(1),
   features: z.array(z.string()).min(1),
   sizes: z.array(z.string()).min(1),

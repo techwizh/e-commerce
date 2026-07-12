@@ -22,6 +22,48 @@ const categories: CategoryInfo[] = [
   },
 ]
 
+const imagePath = (file: string) => `/images/sneakers/${file}`
+
+function sneakerFromImage(
+  id: string,
+  name: string,
+  file: string,
+  price: number,
+  extra: Partial<Product> = {},
+): Product {
+  const image = imagePath(file)
+  return {
+    id,
+    name,
+    category: 'sneakers',
+    price,
+    image,
+    images: [image],
+    description: `${name} from Techwiz Kicks. Street-ready style with cushioned comfort for everyday wear.`,
+    features: ['Premium build', 'Cushioned insole', 'Durable rubber outsole', 'Street-ready design'],
+    sizes: ['7', '8', '9', '10', '11', '12'],
+    colors: [{ name: 'Classic', hex: '#1e293b' }],
+    rating: 4.6,
+    reviewCount: 24,
+    inStock: true,
+    ...extra,
+  }
+}
+
+const pinterestSneakers: Product[] = [
+  sneakerFromImage('sn-005', 'Street Classic Low', 'sneaker-01.jfif', 8999),
+  sneakerFromImage('sn-006', 'Urban Pulse Runner', 'sneaker-02.jfif', 10999),
+  sneakerFromImage('sn-007', 'City Flex Sneaker', 'sneaker-03.jfif', 9999),
+  sneakerFromImage('sn-008', 'Daily Drop Low', 'sneaker-04.jfif', 8499),
+  sneakerFromImage('sn-009', 'Metro Glide', 'sneaker-05.jfif', 11999, { badge: 'New' }),
+  sneakerFromImage('sn-010', 'Weekend Walk', 'sneaker-06.jfif', 9499),
+  sneakerFromImage('sn-011', 'Corner Court', 'sneaker-07.jfif', 10499),
+  sneakerFromImage('sn-012', 'Nike Street Classic', 'nike-classic.jfif', 13999, { badge: 'Best Seller' }),
+  sneakerFromImage('sn-013', 'Jordan Retro 4', 'jordan-retro-4.jfif', 18999, { badge: 'Hot' }),
+  sneakerFromImage('sn-014', 'Air Jordan 6 Retro', 'jordan-6-retro.jfif', 19999, { badge: 'New' }),
+  sneakerFromImage('sn-015', 'Premium 3D Runner', 'premium-3d-sneaker.jfif', 15999),
+]
+
 const products: Product[] = [
   {
     id: 'ss-001',
@@ -263,23 +305,35 @@ const products: Product[] = [
     reviewCount: 89,
     inStock: true,
   },
+  ...pinterestSneakers,
 ]
 
 export function seedDatabase(force = false) {
   const store = readStore()
+  const allProducts = products
 
   if (!force && store.products.length > 0) {
+    const existingIds = new Set(store.products.map((p) => p.id))
+    const newProducts = allProducts.filter((p) => !existingIds.has(p.id))
+
+    if (newProducts.length > 0) {
+      store.products.push(...newProducts)
+      writeStore(store)
+      console.log(`Added ${newProducts.length} new products to the store.`)
+      return
+    }
+
     console.log('Database already seeded. Use --force to reseed.')
     return
   }
 
   writeStore({
     categories,
-    products,
+    products: allProducts,
     orders: store.orders,
   })
 
-  console.log(`Seeded ${categories.length} categories and ${products.length} products.`)
+  console.log(`Seeded ${categories.length} categories and ${allProducts.length} products.`)
 }
 
 if (process.argv[1]?.includes('seed')) {
