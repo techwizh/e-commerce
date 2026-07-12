@@ -76,3 +76,7 @@ export function updateProduct(id: string, product: ProductInput): Promise<Produc
 export function deleteProduct(id: string): Promise<Product> {
   return adminRequest<Product>(`/products/${id}`, { method: 'DELETE' })
 }
+
+export function syncCatalog(): Promise<{ added: number; total: number }> {
+  return adminRequest<{ added: number; total: number }>('/sync-catalog', { method: 'POST' })
+}

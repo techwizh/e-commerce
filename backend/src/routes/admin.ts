@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { readStore, writeStore } from '../db.js'
 import { requireAdmin } from '../middleware/adminAuth.js'
 import { ADMIN_PASSWORD } from '../config.js'
+import { seedDatabase } from '../seed.js'
 import type { Product } from '../types.js'
 
 const router = Router()
@@ -58,6 +59,12 @@ router.post('/login', (req, res) => {
 })
 
 router.use(requireAdmin)
+
+router.post('/sync-catalog', (_req, res) => {
+  const added = seedDatabase()
+  const store = readStore()
+  res.json({ added, total: store.products.length })
+})
 
 router.get('/products', (_req, res) => {
   const store = readStore()

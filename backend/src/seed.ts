@@ -308,7 +308,7 @@ const products: Product[] = [
   ...pinterestSneakers,
 ]
 
-export function seedDatabase(force = false) {
+export function seedDatabase(force = false): number {
   const store = readStore()
   const allProducts = products
 
@@ -320,11 +320,11 @@ export function seedDatabase(force = false) {
       store.products.push(...newProducts)
       writeStore(store)
       console.log(`Added ${newProducts.length} new products to the store.`)
-      return
+      return newProducts.length
     }
 
     console.log('Database already seeded. Use --force to reseed.')
-    return
+    return 0
   }
 
   writeStore({
@@ -334,6 +334,7 @@ export function seedDatabase(force = false) {
   })
 
   console.log(`Seeded ${categories.length} categories and ${allProducts.length} products.`)
+  return allProducts.length
 }
 
 if (process.argv[1]?.includes('seed')) {

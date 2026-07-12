@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { Plus, Pencil, Trash2, LogOut, Package, Lock } from 'lucide-react'
+import { Plus, Pencil, Trash2, LogOut, Package, Lock, RefreshCw } from 'lucide-react'
 import type { Product, Category } from '../types'
 import { formatPrice } from '../utils/currency'
 import {
@@ -9,6 +9,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  syncCatalog,
   getAdminPassword,
   clearAdminPassword,
   type ProductInput,
@@ -106,6 +107,7 @@ export default function AdminPage() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState<FormState>(emptyFormState())
   const [saving, setSaving] = useState(false)
+  const [syncing, setSyncing] = useState(false)
 
   const loadProducts = useCallback(async () => {
     setLoading(true)
@@ -178,6 +180,24 @@ export default function AdminPage() {
       setError(err instanceof Error ? err.message : 'Failed to save')
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleSync = async () => {
+    setSyncing(true)
+    setError('')
+    try {
+      const result = await syncCatalog()
+      await loadProducts()
+      if (result.added > 0) {
+        alert(`Added ${result.added} new products. Store now has ${result.total} products.`)
+      } else {
+        alert(`Catalog is up to date. ${result.total} products in store.`)
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to sync catalog')
+    } finally {
+      setSyncing(false)
     }
   }
 
@@ -262,12 +282,22 @@ export default function AdminPage() {
 
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-surface-800/60">{products.length} products</p>
-          <button
-            onClick={openAdd}
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-500 text-white text-sm font-semibold rounded-xl hover:bg-brand-600 transition-colors"
-          >
-            <Plus className="w-4 h-4" /> Add Product
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleSync}
+              disabled={syncing}
+              className="inline-flex items-center gap-2 px-4 py-2.5 border border-surface-100 text-sm font-semibold rounded-xl hover:bg-white transition-colors disabled:opacity-60"
+            >
+              <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
+              {syncing ? 'Syncing...' : 'Sync Catalog'}
+            </button>
+            <button
+              onClick={openAdd}
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-500 text-white text-sm font-semibold rounded-xl hover:bg-brand-600 transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Add Product
+            </button>
+          </div>
         </div>
 
         {loading ? (
