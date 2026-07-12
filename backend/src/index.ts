@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { PORT } from './config.js'
+import { PORT, ADMIN_PASSWORD } from './config.js'
 import { seedDatabase } from './seed.js'
 import configRoutes from './routes/config.js'
 import categoryRoutes from './routes/categories.js'
@@ -9,6 +9,10 @@ import orderRoutes from './routes/orders.js'
 import adminRoutes from './routes/admin.js'
 
 seedDatabase()
+
+if (!ADMIN_PASSWORD) {
+  console.warn('Warning: ADMIN_PASSWORD is not set. Admin panel will be inaccessible.')
+}
 
 const app = express()
 

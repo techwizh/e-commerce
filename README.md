@@ -60,10 +60,10 @@ Manage products (add, edit, delete) at `/admin`.
 
 | Environment | URL | Default password |
 |---|---|---|
-| Local | http://localhost:5173/admin | `techwiz2026` |
-| Production | https://techwiz-kicks.onrender.com/admin | Set via `ADMIN_PASSWORD` env var on Render |
+| Local | http://localhost:5173/admin | Your `ADMIN_PASSWORD` |
+| Production | https://techwiz-kicks.onrender.com/admin | Your `ADMIN_PASSWORD` on Render |
 
-On Render, go to **techwiz-kicks-api** → **Environment** → set `ADMIN_PASSWORD` to your chosen password, then redeploy.
+On Render, `ADMIN_PASSWORD` is set in **techwiz-kicks-api** → **Environment**.
 
 ## API Endpoints
 

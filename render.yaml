@@ -11,7 +11,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: ADMIN_PASSWORD
-        generateValue: true
+        sync: false
 
   - type: web
     name: techwiz-kicks

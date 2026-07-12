@@ -14,6 +14,7 @@ frontend/dist
 frontend/.vite
 backend/dist
 backend/data
+backend/.env
 *.local
 
 # Editor directories and files
