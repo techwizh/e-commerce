@@ -15,7 +15,7 @@ frontend/.vite
 backend/dist
 backend/data
 backend/.env
-sneakers/
+/sneakers/
 *.local
 
 # Editor directories and files
