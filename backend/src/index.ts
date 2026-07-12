@@ -6,6 +6,7 @@ import configRoutes from './routes/config.js'
 import categoryRoutes from './routes/categories.js'
 import productRoutes from './routes/products.js'
 import orderRoutes from './routes/orders.js'
+import adminRoutes from './routes/admin.js'
 
 seedDatabase()
 
@@ -18,6 +19,7 @@ app.use('/api', configRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/admin', adminRoutes)
 
 app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' })

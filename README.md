@@ -1,6 +1,7 @@
 # Techwiz Kicks — Sports E-Commerce
 
-🌐 **Live store:** [https://techwiz-kicks.onrender.com](https://techwiz-kicks.onrender.com)
+🌐 **Live store:** [https://techwiz-kicks.onrender.com](https://techwiz-kicks.onrender.com)  
+🔧 **Admin panel:** [https://techwiz-kicks.onrender.com/admin](https://techwiz-kicks.onrender.com/admin)
 
 A full-stack e-commerce storefront for sports shoes, sneakers, and athletic shirts.
 
@@ -53,6 +54,17 @@ npm run dev:frontend
 
 The frontend proxies `/api/*` requests to the backend automatically.
 
+## Admin Panel
+
+Manage products (add, edit, delete) at `/admin`.
+
+| Environment | URL | Default password |
+|---|---|---|
+| Local | http://localhost:5173/admin | `techwiz2026` |
+| Production | https://techwiz-kicks.onrender.com/admin | Set via `ADMIN_PASSWORD` env var on Render |
+
+On Render, go to **techwiz-kicks-api** → **Environment** → set `ADMIN_PASSWORD` to your chosen password, then redeploy.
+
 ## API Endpoints
 
 | Method | Endpoint | Description |
@@ -65,6 +77,11 @@ The frontend proxies `/api/*` requests to the backend automatically.
 | GET | `/api/products/:id` | Single product |
 | POST | `/api/orders` | Place an order |
 | GET | `/api/orders/:id` | Get order by ID |
+| POST | `/api/admin/login` | Admin login |
+| GET | `/api/admin/products` | List all products (admin) |
+| POST | `/api/admin/products` | Create product (admin) |
+| PUT | `/api/admin/products/:id` | Update product (admin) |
+| DELETE | `/api/admin/products/:id` | Delete product (admin) |
 
 ## Build
 

@@ -6,12 +6,14 @@ import ShopPage from './pages/ShopPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
+import AdminPage from './pages/AdminPage'
 
 export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
         <Routes>
+          <Route path="admin" element={<AdminPage />} />
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="shop" element={<ShopPage />} />
