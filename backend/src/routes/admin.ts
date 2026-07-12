@@ -42,9 +42,9 @@ function generateId(category: string, products: Product[]): string {
 }
 
 router.post('/login', (req, res) => {
-  const { password } = req.body as { password?: string }
+  const password = String(req.body?.password ?? '').trim()
 
-  if (!password || password !== ADMIN_PASSWORD) {
+  if (!password || !ADMIN_PASSWORD || password !== ADMIN_PASSWORD) {
     res.status(401).json({ error: 'Invalid password' })
     return
   }
