@@ -1,6 +1,7 @@
 import type { CategoryInfo, Product } from '../types'
 
-const API_BASE = '/api'
+const API_ROOT = import.meta.env.VITE_API_URL || ''
+const API_BASE = API_ROOT ? `${API_ROOT.replace(/\/$/, '')}/api` : '/api'
 
 async function request<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`)
