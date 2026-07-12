@@ -1,0 +1,15 @@
+{
+  "name": "techwiz-kicks",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:all": "npm run dev:backend & npm run dev:frontend",
+    "build": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "install:all": "npm install --prefix frontend && npm install --prefix backend",
+    "lint": "npm run lint --prefix frontend"
+  }
+}
