@@ -1,5 +1,7 @@
 # Techwiz Kicks — Sports E-Commerce
 
+🌐 **Live store:** [https://techwiz-kicks.onrender.com](https://techwiz-kicks.onrender.com)
+
 A full-stack e-commerce storefront for sports shoes, sneakers, and athletic shirts.
 
 ![Techwiz Kicks](https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=1200&q=80)
