@@ -61,9 +61,9 @@ router.post('/login', (req, res) => {
 router.use(requireAdmin)
 
 router.post('/sync-catalog', (_req, res) => {
-  const added = seedDatabase()
+  const changed = seedDatabase()
   const store = readStore()
-  res.json({ added, total: store.products.length })
+  res.json({ added: changed, total: store.products.length })
 })
 
 router.get('/products', (_req, res) => {

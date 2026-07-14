@@ -1,18 +1,20 @@
 import { readStore, writeStore } from './db.js'
 import type { CategoryInfo, Product } from './types.js'
 
+const imagePath = (file: string) => `/images/sneakers/${file}`
+
 const categories: CategoryInfo[] = [
   {
     slug: 'sports-shoes',
     name: 'Sports Shoes',
     description: 'High-performance footwear built for training, running, and competition.',
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80',
+    image: imagePath('sneaker-05.jfif'),
   },
   {
     slug: 'sneakers',
     name: 'Sneakers',
     description: 'Street-ready kicks that blend comfort, style, and everyday versatility.',
-    image: 'https://images.unsplash.com/photo-1606107557195-0a29c4cd3b2b?w=800&q=80',
+    image: imagePath('nike-classic.jfif'),
   },
   {
     slug: 'sports-shirts',
@@ -21,8 +23,6 @@ const categories: CategoryInfo[] = [
     image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80',
   },
 ]
-
-const imagePath = (file: string) => `/images/sneakers/${file}`
 
 function sneakerFromImage(
   id: string,
@@ -71,11 +71,8 @@ const products: Product[] = [
     category: 'sports-shoes',
     price: 16999,
     originalPrice: 20999,
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80',
-    images: [
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80',
-      'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80',
-    ],
+    image: imagePath('nike-classic.jfif'),
+    images: [imagePath('nike-classic.jfif'), imagePath('sneaker-01.jfif')],
     description: 'Engineered for speed. The Velocity Pro features a lightweight mesh upper, responsive foam midsole, and carbon-fiber plate for explosive energy return on every stride.',
     features: ['Carbon-fiber plate', 'Breathable mesh upper', 'Responsive foam cushioning', 'Anti-slip rubber outsole'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -93,11 +90,8 @@ const products: Product[] = [
     name: 'TrailBlaze XT',
     category: 'sports-shoes',
     price: 19499,
-    image: 'https://images.unsplash.com/photo-1606107557195-0a29c4cd3b2b?w=600&q=80',
-    images: [
-      'https://images.unsplash.com/photo-1606107557195-0a29c4cd3b2b?w=600&q=80',
-      'https://images.unsplash.com/photo-1605348532760-675e11be3a32?w=600&q=80',
-    ],
+    image: imagePath('jordan-retro-4.jfif'),
+    images: [imagePath('jordan-retro-4.jfif'), imagePath('sneaker-07.jfif')],
     description: 'Conquer any terrain with the TrailBlaze XT. Rugged outsole lugs, waterproof membrane, and reinforced toe cap make this the ultimate off-road companion.',
     features: ['Waterproof membrane', 'Aggressive trail outsole', 'Rock plate protection', 'Gusseted tongue'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -114,8 +108,8 @@ const products: Product[] = [
     name: 'CourtMaster Elite',
     category: 'sports-shoes',
     price: 15599,
-    image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80'],
+    image: imagePath('sneaker-03.jfif'),
+    images: [imagePath('sneaker-03.jfif')],
     description: 'Dominate the court with lateral support and a herringbone traction pattern. The CourtMaster Elite delivers stability for quick cuts and explosive jumps.',
     features: ['Lateral support cage', 'Herringbone traction', 'Zoom Air cushioning', 'Durable leather overlay'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -134,11 +128,8 @@ const products: Product[] = [
     category: 'sneakers',
     price: 12999,
     originalPrice: 15600,
-    image: 'https://images.unsplash.com/photo-1600185365926-3a8ce9ead475?w=600&q=80',
-    images: [
-      'https://images.unsplash.com/photo-1600185365926-3a8ce9ead475?w=600&q=80',
-      'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80',
-    ],
+    image: imagePath('sneaker-02.jfif'),
+    images: [imagePath('sneaker-02.jfif'), imagePath('sneaker-04.jfif')],
     description: 'A timeless silhouette reimagined for modern streets. Premium suede upper, padded collar, and a vulcanized sole deliver all-day comfort with effortless style.',
     features: ['Premium suede upper', 'Padded collar', 'Vulcanized rubber sole', 'Embroidered logo'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -157,8 +148,8 @@ const products: Product[] = [
     name: 'CloudStep Lite',
     category: 'sneakers',
     price: 11699,
-    image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80'],
+    image: imagePath('sneaker-04.jfif'),
+    images: [imagePath('sneaker-04.jfif')],
     description: 'Walk on air with our lightest sneaker yet. Knit upper adapts to your foot while the cloud-foam midsole absorbs impact for mile-after-mile comfort.',
     features: ['Adaptive knit upper', 'Cloud-foam midsole', 'Ultra-lightweight', 'Slip-on design'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -175,8 +166,8 @@ const products: Product[] = [
     name: 'Retro Dunk High',
     category: 'sneakers',
     price: 14300,
-    image: 'https://images.unsplash.com/photo-1605348532760-675e11be3a32?w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1605348532760-675e11be3a32?w=600&q=80'],
+    image: imagePath('jordan-6-retro.jfif'),
+    images: [imagePath('jordan-6-retro.jfif')],
     description: 'Throwback basketball heritage meets contemporary flair. Full-grain leather, classic color blocking, and a padded high-top collar for iconic street style.',
     features: ['Full-grain leather', 'High-top collar', 'Classic color blocking', 'Perforated toe box'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -194,8 +185,8 @@ const products: Product[] = [
     name: 'Slide Comfort',
     category: 'sneakers',
     price: 5999,
-    image: 'https://images.unsplash.com/photo-1603487748691-775a6782f2f7?w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1603487748691-775a6782f2f7?w=600&q=80'],
+    image: imagePath('sneaker-06.jfif'),
+    images: [imagePath('sneaker-06.jfif')],
     description: 'Post-workout recovery starts here. Ergonomic footbed, soft EVA foam, and a textured strap deliver spa-level comfort for your off days.',
     features: ['Ergonomic footbed', 'EVA foam construction', 'Adjustable strap', 'Non-slip sole'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -292,8 +283,8 @@ const products: Product[] = [
     name: 'PowerLift Trainer',
     category: 'sports-shoes',
     price: 18199,
-    image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&q=80',
-    images: ['https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&q=80'],
+    image: imagePath('premium-3d-sneaker.jfif'),
+    images: [imagePath('premium-3d-sneaker.jfif')],
     description: 'Built for the gym floor. A wide stable base, elevated heel, and reinforced upper provide the support you need for squats, deadlifts, and Olympic lifts.',
     features: ['Wide stable base', 'Elevated heel (18mm)', 'Reinforced upper', 'Non-compressible sole'],
     sizes: ['7', '8', '9', '10', '11', '12'],
@@ -313,14 +304,31 @@ export function seedDatabase(force = false): number {
   const allProducts = products
 
   if (!force && store.products.length > 0) {
-    const existingIds = new Set(store.products.map((p) => p.id))
-    const newProducts = allProducts.filter((p) => !existingIds.has(p.id))
+    let added = 0
+    let updated = 0
 
-    if (newProducts.length > 0) {
-      store.products.push(...newProducts)
+    for (const seedProduct of allProducts) {
+      const existing = store.products.find((p) => p.id === seedProduct.id)
+
+      if (!existing) {
+        store.products.push(seedProduct)
+        added++
+        continue
+      }
+
+      if (seedProduct.image.startsWith('/images/') && existing.image !== seedProduct.image) {
+        existing.image = seedProduct.image
+        existing.images = seedProduct.images
+        updated++
+      }
+    }
+
+    store.categories = categories
+
+    if (added > 0 || updated > 0) {
       writeStore(store)
-      console.log(`Added ${newProducts.length} new products to the store.`)
-      return newProducts.length
+      console.log(`Catalog sync: added ${added}, updated ${updated} products.`)
+      return added + updated
     }
 
     console.log('Database already seeded. Use --force to reseed.')
