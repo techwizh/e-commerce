@@ -5,6 +5,9 @@
 
 A full-stack e-commerce storefront for sports shoes, sneakers, and athletic shirts.
 
+📖 **[User Manual](USER_MANUAL.md)** — shopping guide, admin login, and store management  
+📚 **[Technical Documentation](DOCUMENTATION.md)** — architecture, API, deployment, and developer setup
+
 ![Techwiz Kicks](https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=1200&q=80)
 
 ## Project Structure
@@ -56,14 +59,14 @@ The frontend proxies `/api/*` requests to the backend automatically.
 
 ## Admin Panel
 
-Manage products (add, edit, delete) at `/admin`.
+Manage products at `/admin`.
 
-| Environment | URL | Default password |
-|---|---|---|
-| Local | http://localhost:5173/admin | Your `ADMIN_PASSWORD` |
-| Production | https://techwiz-kicks.onrender.com/admin | Your `ADMIN_PASSWORD` on Render |
+| Field | Value |
+|---|---|
+| **Username** | Not required |
+| **Password** | `T3717@ict` |
 
-On Render, `ADMIN_PASSWORD` is set in **techwiz-kicks-api** → **Environment**.
+See **[User Manual](USER_MANUAL.md)** for full admin instructions.
 
 ## API Endpoints
 
@@ -82,6 +85,9 @@ On Render, `ADMIN_PASSWORD` is set in **techwiz-kicks-api** → **Environment**.
 | POST | `/api/admin/products` | Create product (admin) |
 | PUT | `/api/admin/products/:id` | Update product (admin) |
 | DELETE | `/api/admin/products/:id` | Delete product (admin) |
+| POST | `/api/admin/sync-catalog` | Sync seed products to store (admin) |
+
+Full API details in **[Documentation](DOCUMENTATION.md)**.
 
 ## Build
 
